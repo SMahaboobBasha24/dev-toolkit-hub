@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dev Toolkit Hub</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+}
+
+.tabs button{
+padding:10px;
+margin:5px;
+border:none;
+border-radius:6px;
+background:#334155;
+color:white;
+cursor:pointer;
+}
+
+.tabs button.active{
+background:#22c55e;
+}
+
+.section{
+display:none;
+background:#1e293b;
+padding:20px;
+margin-top:10px;
+border-radius:10px;
+}
+
+textarea{
+width:100%;
+height:120px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+padding:10px;
+}
+
+button.action{
+margin-top:10px;
+padding:10px;
+border:none;
+background:#22c55e;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>🧰 Dev Toolkit Hub</h2>
+
+<div class="container">
+
+<div class="tabs">
+<button onclick="showTab('json')" class="active">JSON</button>
+<button onclick="showTab('base64')">Base64</button>
+<button onclick="showTab('url')">URL</button>
+</div>
+
+<!-- JSON -->
+<div id="json" class="section" style="display:block">
+<h3>🧾 JSON Formatter</h3>
+<textarea id="jsonInput"></textarea>
+<button class="action" onclick="formatJSON()">Format</button>
+</div>
+
+<!-- Base64 -->
+<div id="base64" class="section">
+<h3>🔐 Base64</h3>
+<textarea id="baseInput"></textarea>
+<button class="action" onclick="encode()">Encode</button>
+<button class="action" onclick="decode()">Decode</button>
+</div>
+
+<!-- URL -->
+<div id="url" class="section">
+<h3>🌐 URL Encoder</h3>
+<textarea id="urlInput"></textarea>
+<button class="action" onclick="encodeURL()">Encode</button>
+</div>
+
+</div>
+
+<script>
+
+function showTab(id){
+
+document.querySelectorAll(".section").forEach(s=>s.style.display="none")
+document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"))
+
+document.getElementById(id).style.display="block"
+event.target.classList.add("active")
+
+}
+
+function formatJSON(){
+
+try{
+let input = document.getElementById("jsonInput").value
+let output = JSON.stringify(JSON.parse(input), null, 4)
+document.getElementById("jsonInput").value = output
+}
+catch{
+alert("Invalid JSON")
+}
+
+}
+
+function encode(){
+let text = document.getElementById("baseInput").value
+document.getElementById("baseInput").value = btoa(text)
+}
+
+function decode(){
+let text = document.getElementById("baseInput").value
+document.getElementById("baseInput").value = atob(text)
+}
+
+function encodeURL(){
+let text = document.getElementById("urlInput").value
+document.getElementById("urlInput").value = encodeURIComponent(text)
+}
+
+</script>
+
+</body>
+</html>
